@@ -22,6 +22,7 @@ public class Calculadora extends Stage {
     public void CrearUI(){
         CrearKeyboard();
         txtDisplay = new TextField("0");
+        //txtDisplay.setPromptText("Coloca la operacion a realizar");
         txtDisplay.setEditable(false);
         txtDisplay.setAlignment(Pos.BASELINE_RIGHT);
         vBox = new VBox(txtDisplay, gdpTeclado);
@@ -39,6 +40,8 @@ public class Calculadora extends Stage {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 arBtnTeclado[i][j] = new Button(strTeclas[pos]);
+                int finalPos = pos;
+                arBtnTeclado[i][j].setOnAction(e -> EventoTeclado(strTeclas[finalPos]));
                 arBtnTeclado[i][j].setPrefSize(50,50);
                 gdpTeclado.add(arBtnTeclado[i][j],j,i);
                 pos++;
@@ -46,6 +49,12 @@ public class Calculadora extends Stage {
 
         }
     }
+
+    private void EventoTeclado(String strTecla) {
+
+        txtDisplay.appendText(strTecla);
+    }
+
     public Calculadora() {
         CrearUI();
         this.setScene(escena);
