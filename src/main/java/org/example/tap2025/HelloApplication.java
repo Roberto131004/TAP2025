@@ -11,30 +11,38 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.tap2025.vistas.Calculadora;
+import org.example.tap2025.vistas.VentasRestaurante;
+
+
 import java.io.IOException;
 
 public class HelloApplication extends Application {
     private VBox vBox;
     private MenuBar mnbPrincipal;
     private Menu menCompentencia1, menCompetencia2;
-    private MenuItem mitCalculadora;
+    private MenuItem mitCalculadora, mitRestaurante;
     private Scene escena;
 
     void CrearUI(){
         mitCalculadora = new MenuItem("Calculadora");
         mitCalculadora.setOnAction(event -> new Calculadora());
+        mitRestaurante = new MenuItem("Restaurante");
+        mitRestaurante.setOnAction(event -> new VentasRestaurante());
         menCompentencia1 = new Menu("Competencia 1");
-        menCompentencia1.getItems().addAll(mitCalculadora);
+        menCompentencia1.getItems().addAll(mitCalculadora, mitRestaurante);
         mnbPrincipal = new MenuBar();
         mnbPrincipal.getMenus().addAll(menCompentencia1);
         vBox = new VBox(mnbPrincipal);
+
+        escena = new Scene(vBox);
+        escena.getStylesheets().add(getClass().getResource("/styles/calcu.css").toString());
     }
 
     @Override
     public void start(Stage stage) throws IOException {
         CrearUI();
         stage.setTitle("Hola Mundo de Eventos :)");
-        stage.setScene(new Scene(vBox));
+        stage.setScene(escena);
         stage.show();
         stage.setMaximized(true);
     }
