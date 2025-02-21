@@ -10,6 +10,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.tap2025.modelos.Conexion;
 import org.example.tap2025.vistas.Calculadora;
 import org.example.tap2025.vistas.VentasRestaurante;
 
@@ -40,6 +41,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        Conexion.createConexion();
         CrearUI();
         stage.setTitle("Hola Mundo de Eventos :)");
         stage.setScene(escena);
