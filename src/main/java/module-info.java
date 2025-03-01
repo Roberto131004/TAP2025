@@ -10,4 +10,5 @@ module org.example.tap2025 {
     exports org.example.tap2025;
     requires mysql.connector.j;
     requires java.sql;
+    opens org.example.tap2025.modelos;
 }

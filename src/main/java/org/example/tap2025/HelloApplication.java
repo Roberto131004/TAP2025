@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.tap2025.modelos.Conexion;
 import org.example.tap2025.vistas.Calculadora;
+import org.example.tap2025.vistas.ListaClientes;
 import org.example.tap2025.vistas.VentasRestaurante;
 
 
@@ -28,7 +29,7 @@ public class HelloApplication extends Application {
         mitCalculadora = new MenuItem("Calculadora");
         mitCalculadora.setOnAction(event -> new Calculadora());
         mitRestaurante = new MenuItem("Restaurante");
-        mitRestaurante.setOnAction(event -> new VentasRestaurante());
+        mitRestaurante.setOnAction(event -> new ListaClientes());
         menCompentencia1 = new Menu("Competencia 1");
         menCompentencia1.getItems().addAll(mitCalculadora, mitRestaurante);
         mnbPrincipal = new MenuBar();
