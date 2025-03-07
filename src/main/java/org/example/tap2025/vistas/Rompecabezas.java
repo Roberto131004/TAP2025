@@ -16,8 +16,8 @@ import java.util.*;
 
 public class Rompecabezas extends Application {
 
-    public static final int TILE_SIZE = 100; // Tamaño de cada pieza
-    private int gridSize = 3; // Tamaño inicial del rompecabezas
+    public static final int TILE_SIZE = 100;
+    private int gridSize = 3;
     private List<PuzzlePiece> tiles = new ArrayList<>();
     private GridPane puzzleGrid;
     private long startTime;
@@ -43,7 +43,7 @@ public class Rompecabezas extends Application {
         // Botón para iniciar el juego
         startButton = new Button("Iniciar Juego");
         startButton.setOnAction(e -> {
-            System.out.println("✔ Botón 'Iniciar Juego' fue presionado.");
+            System.out.println(" Botón 'Iniciar Juego' fue presionado.");
             Platform.runLater(this::startGame);
         });
 
@@ -60,15 +60,15 @@ public class Rompecabezas extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        System.out.println("✔ Ventana mostrada correctamente.");
+        System.out.println(" Ventana mostrada correctamente.");
     }
 
     private void startGame() {
-        System.out.println("🔄 Iniciando nuevo juego...");
+        System.out.println(" Iniciando nuevo juego...");
         puzzleGrid.getChildren().clear(); // Limpia el tablero
         tiles.clear(); // Limpia la lista de piezas
 
-        // Obtener el tamaño seleccionado
+
         gridSize = Integer.parseInt(sizeSelector.getValue().split("x")[0]);
 
         List<PuzzlePiece> tempTiles = new ArrayList<>();
@@ -92,7 +92,7 @@ public class Rompecabezas extends Application {
                     index++;
                 }
             }
-            System.out.println("✔ Tablero generado con imágenes.");
+            System.out.println(" Tablero generado con imágenes.");
         });
 
         // Reiniciar el temporizador
@@ -108,18 +108,18 @@ public class Rompecabezas extends Application {
             }
         }, 0, 1000);
 
-        System.out.println("✔ Temporizador iniciado.");
+        System.out.println(" Temporizador iniciado.");
     }
 
     public boolean isPuzzleSolved() {
-        System.out.println("🔍 Verificando si el rompecabezas está resuelto...");
+        System.out.println(" Verificando si el rompecabezas está resuelto...");
         for (PuzzlePiece piece : tiles) {
             Integer currentRow = GridPane.getRowIndex(piece);
             Integer currentCol = GridPane.getColumnIndex(piece);
             int correctRow = piece.getCorrectRow();
             int correctCol = piece.getCorrectCol();
 
-            System.out.println("🔎 PIEZA: Esperado (" + correctRow + ", " + correctCol + ") - Actual (" + currentRow + ", " + currentCol + ")");
+            System.out.println(" PIEZA: Esperado (" + correctRow + ", " + correctCol + ") - Actual (" + currentRow + ", " + currentCol + ")");
 
             if (currentRow == null || currentCol == null || currentRow != correctRow || currentCol != correctCol) {
                 return false;

@@ -70,7 +70,7 @@ public class PuzzlePiece extends ImageView {
         if (!locked) {
             startX = event.getSceneX();
             startY = event.getSceneY();
-            System.out.println("🔄 Moviendo pieza desde [" + correctRow + ", " + correctCol + "]");
+            System.out.println("Moviendo pieza desde [" + correctRow + ", " + correctCol + "]");
         }
     }
 
@@ -106,13 +106,13 @@ public class PuzzlePiece extends ImageView {
             // Verificar si la pieza está en la posición correcta
             if (isInCorrectPosition()) {
                 setLocked(true);
-                System.out.println("✔ Pieza bloqueada en la posición correcta.");
+                System.out.println(" Pieza bloqueada en la posición correcta.");
             }
 
             // Comprobar si el rompecabezas está completo
             Platform.runLater(() -> {
                 if (game.isPuzzleSolved()) {
-                    System.out.println("🎉 Rompecabezas completado.");
+                    System.out.println(" Rompecabezas completado.");
                 }
             });
         }

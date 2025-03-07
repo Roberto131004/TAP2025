@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import org.example.tap2025.modelos.Conexion;
 import org.example.tap2025.vistas.Calculadora;
 import org.example.tap2025.vistas.ListaClientes;
-import org.example.tap2025.vistas.Rompecabezas; // Importamos el juego
+import org.example.tap2025.vistas.Rompecabezas;
 import org.example.tap2025.vistas.VentasRestaurante;
 
 import java.io.IOException;
@@ -20,25 +20,19 @@ public class HelloApplication extends Application {
     private VBox vBox;
     private MenuBar mnbPrincipal;
     private Menu menCompentencia1, menCompetencia2;
-    private MenuItem mitCalculadora, mitRestaurante, mitRompecabezas; // Agregamos el item del rompecabezas
+    private MenuItem mitCalculadora, mitRestaurante, mitRompecabezas;
     private Scene escena;
 
     void CrearUI(){
-        // Opción del menú "Calculadora"
+
         mitCalculadora = new MenuItem("Calculadora");
         mitCalculadora.setOnAction(event -> new Calculadora());
-
-        // Opción del menú "Restaurante"
         mitRestaurante = new MenuItem("Restaurante");
         mitRestaurante.setOnAction(event -> new ListaClientes());
-
-        // Nueva opción del menú "Rompecabezas"
         mitRompecabezas = new MenuItem("Rompecabezas");
-        mitRompecabezas.setOnAction(event -> abrirRompecabezas()); // Llamamos al método para abrir el juego
-
-        // Agregamos las opciones a "Competencia 1"
+        mitRompecabezas.setOnAction(event -> abrirRompecabezas());
         menCompentencia1 = new Menu("Competencia 1");
-        menCompentencia1.getItems().addAll(mitCalculadora, mitRestaurante, mitRompecabezas); // Se agrega el nuevo item
+        menCompentencia1.getItems().addAll(mitCalculadora, mitRestaurante, mitRompecabezas);
 
         // Barra de menú principal
         mnbPrincipal = new MenuBar();
@@ -68,7 +62,6 @@ public class HelloApplication extends Application {
         System.out.println("Evento desde un método :)");
     }
 
-    // Método para abrir el rompecabezas en una nueva ventana
     private void abrirRompecabezas() {
         Stage rompecabezasStage = new Stage();
         Rompecabezas rompecabezas = new Rompecabezas();
