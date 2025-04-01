@@ -1,5 +1,4 @@
 package org.example.tap2025.vistas;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,8 +17,16 @@ public class Calculadora extends Stage {
     private VBox vBox;
     private GridPane gdpTeclado;
     private Button[][] arBtnTeclado;
-    private String strTeclas[] = {"7","8","9","/","4","5","6","*","1","2","3","-","C","0","=","+"};
-    private boolean nuevoNumero = true; // Indica si se debe limpiar el display después de un resultado
+
+    private String strTeclas[] = {
+            "7", "8", "9", "/",
+            "4", "5", "6", "*",
+            "1", "2", "3", "-",
+            "C", "0", ".", "+",
+            "="
+    };
+
+    private boolean nuevoNumero = true;
 
     public void CrearUI(){
         CrearKeyboard();
@@ -30,25 +37,27 @@ public class Calculadora extends Stage {
         vBox = new VBox(txtDisplay, gdpTeclado);
         vBox.setSpacing(10);
         vBox.setPadding(new Insets(10));
-        escena = new Scene(vBox, 250, 300);
+        escena = new Scene(vBox, 250, 330);
     }
 
     public void CrearKeyboard(){
-        arBtnTeclado = new Button[4][4];
+        arBtnTeclado = new Button[5][4]; // ahora 5 filas para incluir "="
         gdpTeclado = new GridPane();
         gdpTeclado.setHgap(5);
         gdpTeclado.setVgap(5);
         gdpTeclado.setAlignment(Pos.CENTER);
 
         int pos = 0;
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
-                arBtnTeclado[i][j] = new Button(strTeclas[pos]);
-                arBtnTeclado[i][j].setStyle("-fx-font-size: 16px; -fx-pref-width: 50px; -fx-pref-height: 50px;");
-                int finalPos = pos;
-                arBtnTeclado[i][j].setOnAction(event -> EventoTeclado(strTeclas[finalPos]));
-                gdpTeclado.add(arBtnTeclado[i][j], j, i);
-                pos++;
+                if (pos < strTeclas.length) {
+                    arBtnTeclado[i][j] = new Button(strTeclas[pos]);
+                    arBtnTeclado[i][j].setStyle("-fx-font-size: 16px; -fx-pref-width: 50px; -fx-pref-height: 50px;");
+                    int finalPos = pos;
+                    arBtnTeclado[i][j].setOnAction(event -> EventoTeclado(strTeclas[finalPos]));
+                    gdpTeclado.add(arBtnTeclado[i][j], j, i);
+                    pos++;
+                }
             }
         }
     }
@@ -71,31 +80,27 @@ public class Calculadora extends Stage {
     private void calcularResultado() {
         String expresion = txtDisplay.getText();
 
-        //  no termine en un operador
+        // Validaciones
         if (expresion.endsWith("+") || expresion.endsWith("-") || expresion.endsWith("*") || expresion.endsWith("/")) {
             txtDisplay.setText("Error");
             return;
         }
 
-        //  solo contenga números y operadores permitidos
         if (!expresion.matches("[0-9+\\-*/.]+")) {
             txtDisplay.setText("Error");
             return;
         }
 
-        //  no haya operadores consecutivos
         if (expresion.matches(".*[+\\-*/]{2,}.*")) {
             txtDisplay.setText("Error");
             return;
         }
 
-        // división por cero
         if (expresion.contains("/0")) {
             txtDisplay.setText("NaN");
             return;
         }
 
-        // Evaluar expresión si pasa todas las validaciones
         double resultado = evaluarExpresion(expresion);
 
         if (Double.isNaN(resultado) || Double.isInfinite(resultado)) {
@@ -105,7 +110,6 @@ public class Calculadora extends Stage {
             nuevoNumero = true;
         }
     }
-
 
     private double evaluarExpresion(String expresion) {
         return evaluar(expresion.replaceAll("÷", "/").replaceAll("×", "*"));
@@ -131,12 +135,15 @@ public class Calculadora extends Stage {
                 operadores.push(ch);
             }
         }
+
         if (numBuffer.length() > 0) {
             valores.push(Double.parseDouble(numBuffer.toString()));
         }
+
         while (!operadores.isEmpty()) {
             valores.push(aplicarOperacion(operadores.pop(), valores.pop(), valores.pop()));
         }
+
         return valores.pop();
     }
 
